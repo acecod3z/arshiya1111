@@ -48,13 +48,11 @@
   <div class="eyebrow">A little something, just for you</div>
   <h1>For someone<br>special.</h1>
   <div class="sub" id="intro">Some things are worth waiting for.<br>This one is yours at 11:11.</div>
-  <div class="clock" id="clock">--:--:--</div>
-  <div class="date">11 November 2026 · 11:11 AM</div>
-  <div class="envelope-wrap" id="envelope">
+<div class="envelope-wrap" id="envelope">
     <div class="envelope"></div><div class="flap" id="flap"></div><div class="seal">♥</div>
   </div>
-  <div class="locked-note" id="status">This little letter is still sealed.</div>
-  <button id="openBtn" disabled>OPEN YOUR LETTER</button>
+  <div class="locked-note" id="status">A little letter, just for you.</div>
+  <button id="openBtn">OPEN YOUR LETTER</button>
   <section class="letter" id="letter">
     <h2>Hi Arshiya, ♡</h2>
     <p>Chances of you opening this letter are 20–80 — 20% opening it and 80% not opening it. I know you hate reading long paras, as they’re old-school things, and you also told me that once. Well, I’m sorry. I wanted to attach a voice note, but I guess there’s an issue with that. Nevertheless, I’ll still write what I want to write.</p>
@@ -71,37 +69,14 @@
   </section>
 </main>
 <script>
-  // Uses the viewer's local clock. The letter unlocks at 11:11 AM on 11 Nov 2026.
-  const unlockAt = new Date(2026, 10, 11, 11, 11, 0, 0);
-  const clock = document.getElementById('clock');
-  const status = document.getElementById('status');
+  // The letter is available immediately; no countdown or scheduled unlock.
   const button = document.getElementById('openBtn');
   const letter = document.getElementById('letter');
   const flap = document.getElementById('flap');
-  const intro = document.getElementById('intro');
-  let unlocked = false;
 
-  function update() {
-    const now = new Date();
-    const remaining = unlockAt - now;
-    if (remaining <= 0) {
-      clock.textContent = '11:11';
-      status.textContent = 'It’s time. This one is just for you.';
-      button.disabled = false;
-      intro.innerHTML = 'A little moment, saved especially for you.';
-      unlocked = true;
-      return;
-    }
-    const total = Math.floor(remaining / 1000);
-    const h = String(Math.floor(total / 3600)).padStart(2,'0');
-    const m = String(Math.floor((total % 3600) / 60)).padStart(2,'0');
-    const s = String(total % 60).padStart(2,'0');
-    clock.textContent = `${h}:${m}:${s}`;
-  }
   button.addEventListener('click', () => {
-    if (!unlocked) return;
     letter.style.display = 'block';
-    status.textContent = 'A little message, from me to you.';
+    document.getElementById('status').textContent = 'A little message, from me to you.';
     button.style.display = 'none';
     flap.style.transform = 'rotateX(180deg)';
     document.getElementById('envelope').style.opacity = '.45';
@@ -115,8 +90,6 @@
       setTimeout(()=>heart.remove(),10000);
     }
   });
-  update();
-  setInterval(update, 250);
 </script>
 </body>
 </html>
