@@ -9,7 +9,7 @@
   :root { color-scheme: dark; --pink:#ff9dbd; --cream:#fff1e8; }
   * { box-sizing:border-box }
   body {
-    margin:0; min-height:100vh; overflow:hidden; display:grid; place-items:center;
+    margin:0; min-height:100vh; overflow-x:hidden; overflow-y:auto; display:flex; justify-content:center; align-items:flex-start;
     font-family: Georgia, 'Times New Roman', serif; color:var(--cream);
     background: radial-gradient(ellipse at 50% 15%, #59304f 0%, #28182f 42%, #100d1a 100%);
   }
@@ -17,7 +17,7 @@
   .stars { position:fixed; inset:0; pointer-events:none; opacity:.55;
     background-image:radial-gradient(1px 1px at 10% 20%,#fff,transparent),radial-gradient(2px 2px at 80% 15%,#ffd8e5,transparent),radial-gradient(1px 1px at 65% 70%,#fff,transparent),radial-gradient(1px 1px at 25% 82%,#fff,transparent),radial-gradient(2px 2px at 90% 55%,#fff,transparent);
     background-size:230px 210px; }
-  main { width:min(92vw,560px); text-align:center; position:relative; padding:28px 20px; }
+  main { width:min(92vw,560px); text-align:center; position:relative; padding:28px 20px; margin-block:clamp(12px, 5vh, 40px); flex:0 0 auto; }
   .eyebrow { letter-spacing:.28em; text-transform:uppercase; font:11px/1.5 Arial,sans-serif; color:#f6b8ce; }
   h1 { font-size:clamp(2.3rem,8vw,4.2rem); font-weight:normal; line-height:1.05; margin:18px 0 12px; }
   .sub { color:#e9cbd7; font-size:1.05rem; line-height:1.7; }
@@ -47,7 +47,7 @@
 <main>
   <div class="eyebrow">A little something, just for you</div>
   <h1>For someone<br>special.</h1>
-  <div class="sub" id="intro">Some things are worth waiting for.<br>This one is yours at 11:11.</div>
+  <div class="sub" id="intro">A little note, written just for you.</div>
 <div class="envelope-wrap" id="envelope">
     <div class="envelope"></div><div class="flap" id="flap"></div><div class="seal">♥</div>
   </div>
