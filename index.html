@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#170f22">
+<title>A little something for you</title>
+<style>
+  :root { color-scheme: dark; --pink:#ff9dbd; --cream:#fff1e8; }
+  * { box-sizing:border-box }
+  body {
+    margin:0; min-height:100vh; overflow:hidden; display:grid; place-items:center;
+    font-family: Georgia, 'Times New Roman', serif; color:var(--cream);
+    background: radial-gradient(ellipse at 50% 15%, #59304f 0%, #28182f 42%, #100d1a 100%);
+  }
+  .glow { position:fixed; width:420px; height:420px; border-radius:50%; filter:blur(90px); opacity:.22; pointer-events:none; background:#ff6f9f; top:-180px; left:calc(50% - 210px); }
+  .stars { position:fixed; inset:0; pointer-events:none; opacity:.55;
+    background-image:radial-gradient(1px 1px at 10% 20%,#fff,transparent),radial-gradient(2px 2px at 80% 15%,#ffd8e5,transparent),radial-gradient(1px 1px at 65% 70%,#fff,transparent),radial-gradient(1px 1px at 25% 82%,#fff,transparent),radial-gradient(2px 2px at 90% 55%,#fff,transparent);
+    background-size:230px 210px; }
+  main { width:min(92vw,560px); text-align:center; position:relative; padding:28px 20px; }
+  .eyebrow { letter-spacing:.28em; text-transform:uppercase; font:11px/1.5 Arial,sans-serif; color:#f6b8ce; }
+  h1 { font-size:clamp(2.3rem,8vw,4.2rem); font-weight:normal; line-height:1.05; margin:18px 0 12px; }
+  .sub { color:#e9cbd7; font-size:1.05rem; line-height:1.7; }
+  .clock { font: clamp(2.5rem,10vw,4.8rem)/1 Arial,sans-serif; letter-spacing:.06em; margin:30px 0 12px; color:#ffd4e2; text-shadow:0 0 28px #ff77a4; font-variant-numeric:tabular-nums; }
+  .date { color:#c9a9b8; font:12px Arial,sans-serif; letter-spacing:.18em; text-transform:uppercase; }
+  .envelope-wrap { margin:30px auto 22px; width:150px; height:112px; position:relative; }
+  .envelope { position:absolute; inset:15px 0 0; border-radius:8px; background:linear-gradient(145deg,#f6a6bd,#c45e87); box-shadow:0 14px 35px #08061088; }
+  .envelope:before { content:""; position:absolute; inset:0; background:linear-gradient(35deg,transparent 49%,#e888a8 50%) left bottom/50% 100% no-repeat,linear-gradient(-35deg,transparent 49%,#f4b1c6 50%) right bottom/50% 100% no-repeat; }
+  .flap { position:absolute; top:15px; left:0; width:0; height:0; border-left:75px solid transparent; border-right:75px solid transparent; border-top:58px solid #ffd0dc; transform-origin:top; transition:transform .8s ease; filter:drop-shadow(0 3px 2px #7a3555); }
+  .seal { position:absolute; top:55px; left:62px; width:26px; height:26px; border-radius:50%; background:#9c315d; display:grid; place-items:center; color:#ffe8ef; font-size:14px; }
+  .locked-note { margin-top:10px; color:#e9cbd7; font-size:1rem; line-height:1.6; }
+  button { border:1px solid #f6a9c3; background:#f4a2bd; color:#351528; padding:14px 25px; border-radius:999px; font: bold 13px Arial,sans-serif; letter-spacing:.1em; cursor:pointer; transition:.2s; box-shadow:0 8px 25px #ff8db333; }
+  button:hover { transform:translateY(-2px); background:#ffd0df; }
+  button:disabled { opacity:.45; cursor:default; transform:none; }
+  .letter { display:none; margin:28px auto 0; padding:28px 25px; border:1px solid #f6b7cc55; border-radius:18px; background:#fff7f00d; box-shadow:0 18px 60px #0004; animation:appear .9s ease both; }
+  .letter h2 { font-size:1.8rem; font-weight:normal; color:#ffd0df; margin:0 0 18px; }
+  .letter p { font-size:1.12rem; line-height:1.9; color:#fff0e9; margin:0 0 14px; }
+  .signature { color:#ffb4ca; font-style:italic; margin-top:20px; }
+  .heart { position:fixed; bottom:-30px; color:#ff9dbd; opacity:0; animation:float 7s linear infinite; pointer-events:none; }
+  @keyframes appear { from {opacity:0; transform:translateY(15px) scale(.98)} to {opacity:1;transform:none} }
+  @keyframes float { 10%{opacity:.6} 100%{transform:translateY(-110vh) rotate(25deg);opacity:0} }
+  @media(max-height:720px){ main{padding:12px} .clock{margin:18px 0 8px}.envelope-wrap{margin:18px auto 12px}.letter{margin-top:15px;padding:20px} }
+</style>
+</head>
+<body>
+<div class="glow"></div><div class="stars"></div>
+<main>
+  <div class="eyebrow">A little something, just for you</div>
+  <h1>For someone<br>special.</h1>
+  <div class="sub" id="intro">Some things are worth waiting for.<br>This one is yours at 11:11.</div>
+  <div class="clock" id="clock">--:--:--</div>
+  <div class="date">11 November 2026 · 11:11 AM</div>
+  <div class="envelope-wrap" id="envelope">
+    <div class="envelope"></div><div class="flap" id="flap"></div><div class="seal">♥</div>
+  </div>
+  <div class="locked-note" id="status">This little letter is still sealed.</div>
+  <button id="openBtn" disabled>OPEN YOUR LETTER</button>
+  <section class="letter" id="letter">
+    <h2>Hi Arshiya, ♡</h2>
+    <p>Chances of you opening this letter are 20–80 — 20% opening it and 80% not opening it. I know you hate reading long paras, as they’re old-school things, and you also told me that once. Well, I’m sorry. I wanted to attach a voice note, but I guess there’s an issue with that. Nevertheless, I’ll still write what I want to write.</p>
+    <p>First of all, ek baat bata, tu theek toh hai na? I mean, lagti nahi hai.</p>
+    <p>Waise mujhe aisa lagta hai ki jab tujhe zaroorat thi, toh shayad main available nahi tha. Sorry about that, but meri bhi haalat kuch theek nahi thi. Khair, hum uske baare mein baat nahi karenge.</p>
+    <p>I hope meri Laxmi ji ki (matlab ki aapki) Diwali kaafi happy-happy rahi ho.</p>
+    <p>Waise toh I am tired of waiting, lekin phir sochta hoon ki agar aap Shimla aa bhi gayi, toh baat toh waise bhi nahi hoti hai. I guess main kuch zyada hi tang karta hoon tujhe message-vessage karke. 🧘🏼 Khair, woh toh main karta rahunga, tu ignore kar diya kar.</p>
+    <p>Aur meri 11:11 wish on 11/11/2026, aap hi ho.</p>
+    <p>And yaar, tujhe koi dikkat-vikkat ho na, toh mujhe call kar diya kar. Itni baar bola hai! Sad-vad mat hua kar. 😋 I know tu bohot strong hai, but har time strong bane rehna zaroori nahi hota. Kabhi mann heavy ho, kuch share karna ho, ya bas bina kisi reason ke baat karni ho, toh I'm just a call away. You don't have to figure everything out on your own, okay?</p>
+    <p>Bas apna khayal rakha kar. Khush raha kar, thoda kam overthink kiya kar (haan, pata hai kehna easy hai 🥴), aur kabhi-kabhi khud ko bhi utni importance diya kar jitni baaki sabko deti hai. You deserve that.</p>
+    <p>Anddddddddd yeah 🥴 ab bye-bye. Aapka toh reply bhi nahi aayega ispe, mujhe pata hai. Phir bhi likh diya.</p>
+    <p>Bas itna hi — smile karte rehna. Take care, okay? ❤️</p>
+    <div class="signature">— someone who wanted to make you smile</div>
+  </section>
+</main>
+<script>
+  // Uses the viewer's local clock. The letter unlocks at 11:11 AM on 11 Nov 2026.
+  const unlockAt = new Date(2026, 10, 11, 11, 11, 0, 0);
+  const clock = document.getElementById('clock');
+  const status = document.getElementById('status');
+  const button = document.getElementById('openBtn');
+  const letter = document.getElementById('letter');
+  const flap = document.getElementById('flap');
+  const intro = document.getElementById('intro');
+  let unlocked = false;
+
+  function update() {
+    const now = new Date();
+    const remaining = unlockAt - now;
+    if (remaining <= 0) {
+      clock.textContent = '11:11';
+      status.textContent = 'It’s time. This one is just for you.';
+      button.disabled = false;
+      intro.innerHTML = 'A little moment, saved especially for you.';
+      unlocked = true;
+      return;
+    }
+    const total = Math.floor(remaining / 1000);
+    const h = String(Math.floor(total / 3600)).padStart(2,'0');
+    const m = String(Math.floor((total % 3600) / 60)).padStart(2,'0');
+    const s = String(total % 60).padStart(2,'0');
+    clock.textContent = `${h}:${m}:${s}`;
+  }
+  button.addEventListener('click', () => {
+    if (!unlocked) return;
+    letter.style.display = 'block';
+    status.textContent = 'A little message, from me to you.';
+    button.style.display = 'none';
+    flap.style.transform = 'rotateX(180deg)';
+    document.getElementById('envelope').style.opacity = '.45';
+    for (let i=0;i<18;i++) {
+      const heart = document.createElement('span');
+      heart.className = 'heart'; heart.textContent = Math.random() > .5 ? '♥' : '♡';
+      heart.style.left = Math.random()*100 + 'vw';
+      heart.style.animationDelay = Math.random()*3 + 's';
+      heart.style.fontSize = (12+Math.random()*18) + 'px';
+      document.body.appendChild(heart);
+      setTimeout(()=>heart.remove(),10000);
+    }
+  });
+  update();
+  setInterval(update, 250);
+</script>
+</body>
+</html>
